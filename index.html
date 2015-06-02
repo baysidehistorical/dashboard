@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html data-ng-app="dbBHS">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BHS Dashboard</title>
+    <link rel="shortcut icon" href="http://www.baysidehistorical.org/favicon.ico">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <dbnav></dbnav>
+    <div class="container-fluid">
+      <div class="row">
+        <div ng-controller="SidebarCtrl" class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li ng-class="{active: isCurrentTab('home')}"><a ng-click="setTab('home')" href="#/">Home <span class="sr-only">(current)</span></a></li>
+            <li ng-class="{active: isCurrentTab('events')}"><a ng-click="setTab('events')" href="#/events">Events</a></li>
+            <li ng-class="{active: isCurrentTab('account')}"><a ng-click="setTab('account')" href="#/account">Account</a></li>
+          </ul>
+        </div>
+        <div ui-view class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+        </div>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/1.1.1/angularfire.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="app.js"></script>
+    <script src="factories.js"></script>
+    <script src="controllers.js"></script>
+    <script src="directives.js"></script>
+  </body>
+</html>
