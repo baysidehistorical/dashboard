@@ -15,4 +15,11 @@ angular.module('dbBHS.directives', [])
       },
       controllerAs: 'NavCtrl'
     };
-  }]);
+  }])
+  .directive('eventform', function () {
+    return {
+      restrict: 'E',
+      templateUrl: 'partials/add-event.html',
+      controller: 'EventCtrl'
+    };
+  });

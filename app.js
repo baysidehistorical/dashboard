@@ -3,6 +3,7 @@
 angular.module('dbBHS', [
   'firebase',
   'ui.router',
+  'ui.bootstrap',
   'dbBHS.factories',
   'dbBHS.directives',
   'dbBHS.controllers'
@@ -41,4 +42,5 @@ angular.module('dbBHS', [
       }]
     }
   });
-}]);
+}])
+.constant('FIREBASE_URL', 'https://baysidehistorical.firebaseio.com');
