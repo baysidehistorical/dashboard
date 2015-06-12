@@ -2,6 +2,7 @@
 
 angular.module('dbBHS', [
   'firebase',
+  'summernote',
   'ui.router',
   'ui.bootstrap',
   'dbBHS.factories',
