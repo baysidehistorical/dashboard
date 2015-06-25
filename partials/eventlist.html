@@ -30,7 +30,7 @@
     <accordion-heading>
       {{ events[0].title }}
     </accordion-heading>
-    <img src="{{ events[0].image }}" class="img-responsive" height="30">
+    <img src="{{ events[0].image }}" style="max-width:300px;">
     <br>
     <dl>
       <dt class="text-uppercase">Overview</dt>
@@ -39,19 +39,20 @@
       <dd>{{ events[0].date }}</dd>
       <dd>{{ events[0].time.from }} - {{ events[0].time.to }}</dd>
       <dt class="text-uppercase">Cost</dt>
-      <dd>${{ events[0].cost.member }} BHS members</dd>
-      <dd>${{ events[0].cost.nonmember }} non-BHS members</dd>
+      <dd ng-if="events[0].cost.member != 0">${{ events[0].cost.member }} BHS members</dd>
+      <dd ng-if="events[0].cost.nonmember != 0">${{ events[0].cost.nonmember }} non-BHS members</dd>
+      <dd ng-if="events[0].cost.custom != 0">{{ events[0].cost.custom }}</dd>
     </dl>
     <ul class="list-inline pull-right glyphicon">
       <li><span class="glyphicon-pencil"></span> Edit</li>
       <li><a href="" ng-click="open(events[0])"><span class="glyphicon-trash"></span> Delete</a></li>
     </ul>
   </accordion-group>
-  <accordion-group is-open="status.open" ng-repeat="event in events.slice(1) | orderBy:'date'">
+  <accordion-group is-open="status.open" ng-repeat="event in events.slice(1) | orderBy:'event.date'">
     <accordion-heading>
       {{ event.title }}
     </accordion-heading>
-    <img src="{{ event.image }}" class="img-responsive">
+    <img src="{{ event.image }}" style="max-width:300px;">
     <br>
     <dl>
       <dt>Overview</dt>
@@ -60,8 +61,9 @@
       <dd>{{ event.date }}</dd>
       <dd>{{ event.time.from }} - {{ event.time.to }}</dd>
       <dt>Cost</dt>
-      <dd>${{ event.cost.member }} BHS members</dd>
-      <dd>${{ event.cost.nonmember }} non-BHS members</dd>
+      <dd ng-if="event.cost.member != 0">${{ event.cost.member }} BHS members</dd>
+      <dd ng-if="event.cost.nonmember != 0">${{ event.cost.nonmember }} non-BHS members</dd>
+      <dd ng-if="event.cost.custom != 0">{{ event.cost.custom }}</dd>
     </dl>
     <ul class="list-inline pull-right glyphicon">
       <li><span class="glyphicon-pencil"></span> Edit</li>

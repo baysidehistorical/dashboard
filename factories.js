@@ -9,7 +9,9 @@ angular.module('dbBHS.factories', [])
     var Auth = {
       obj: function(){ return auth; },
       login: function(){
+        // scope email asks user permission to get their primary email address
         return auth.$authWithOAuthPopup("google", { scope:"email"}).then(function(authData) {
+                // Check to see if user is logged in using the correct domain
                 if (authData.google.email.split("@")[1] != "baysidehistorical.org") {
                   auth.$unauth()
                   alert("Please sign in using @baysidehistorical.org email address!");
@@ -27,18 +29,26 @@ angular.module('dbBHS.factories', [])
     var ref = new Firebase(FIREBASE_URL + "/events");
     var events = $firebaseArray(ref);
 
+    // For date conversion
     var d_names = new Array("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
     var m_names = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
 
     var Event = {
       all: events,
       create: function(eventData) {
-        if (eventData.cost.member == null && eventData.cost.nonmember == null){
-          eventData.cost.member = 0;
-          eventData.cost.nonmember = 0;
-          // console.log("This is a FREE event!");
+        // To avoid null value in Firebase
+        // No cost value is entered, free event
+        if (eventData.cost.member == null && eventData.cost.nonmember == null && eventData.cost.custom == null){
+          eventData.cost.member = 0; // Avoid null in Firebase
+          eventData.cost.nonmember = 0; // Avoid null in Firebase
+          eventData.cost.custom = 0; // Avoid null in Firebase
         }
-        // Convert date object to store in Firebase
+        // Custom cost value
+        else if (eventData.cost.member == null && eventData.cost.nonmember == null && eventData.cost.custom != null) {
+          eventData.cost.member = 0; // Avoid null in Firebase
+          eventData.cost.nonmember = 0; // Avoid null in Firebase
+        }
+        // Convert date and time object to string in order to store in Firebase
         var d = eventData.date;
         eventData.date = d_names[d.getDay()] + ", " + m_names[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
         eventData.time.from = tts(eventData.time.from);
@@ -59,6 +69,7 @@ angular.module('dbBHS.factories', [])
     return Event;
   });
 
+// For time conversion
 function tts(time){
   var a_p = "";
   var d = time;
