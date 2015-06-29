@@ -57,6 +57,7 @@ angular.module('dbBHS.controllers', [])
           $scope.isCollapsed = true;
       });
     }
+
   }])
   .controller('EventListCtrl', ['$scope', 'Auth', 'currentAuth', 'Event', '$modal', function($scope, Auth, currentAuth, Event, $modal) {
     $scope.msg = "All events";
@@ -92,6 +93,19 @@ angular.module('dbBHS.controllers', [])
         console.log("Event deletion is canceled");
       });
     };
+
+    /* COMING SOON
+    $scope.edit = function(eventData){
+      $scope.isCollapsed = false;
+      $scope.title = eventData.title;
+      $scope.description = eventData.description;
+      $scope.member = eventData.cost.member; $scope.nonmember = eventData.cost.nonmember; $scope.custom = eventData.cost.custom;
+      $scope.date = eventData.date;
+      $scope.from = eventData.time.from; $scope.to = eventData.time.to;
+      $scope.dca = eventData.dca;
+      $scope.image = eventData.image;
+    }
+    */
 
   }])
   .controller('ModalInstanceCtrl', function ($scope, $modalInstance, event) {
