@@ -42,10 +42,12 @@ angular.module('dbBHS.controllers', [])
       eventData.description = $scope.description;
       eventData.cost = { member: $scope.member, nonmember: $scope.nonmember, custom: $scope.custom };
       eventData.date = $scope.date;
+      eventData.sortDate = $scope.date.getTime();
       eventData.time = { from: $scope.from, to: $scope.to };
       eventData.dca = $scope.dca;
       eventData.image = $scope.eventImgData;
       // Passing event data to the Event Factory
+      console.log(eventData.sortDate);
       Event.create(eventData).then(function (){
           // Clear the form after event data is stored in firebase successfully
           $scope.title = ""; $scope.description = "";
@@ -62,7 +64,6 @@ angular.module('dbBHS.controllers', [])
   .controller('EventListCtrl', ['$scope', 'Auth', 'currentAuth', 'Event', '$modal', function($scope, Auth, currentAuth, Event, $modal) {
     $scope.msg = "All events";
     $scope.oneAtATime = true; // Opening event list tab on at a time
-    $scope.isFirstOpen = true; // By default, first event list tab open automatically when page is loaded
     $scope.isCollapsed = true; // Create event form
 
     // Show create event form when function get called
@@ -127,4 +128,7 @@ angular.module('dbBHS.controllers', [])
       if ($scope.currentTab === value) return true;
       else return false;
     };
+  }])
+  .controller('HelpCtrl', ['$scope', function($scope) {
+
   }]);
